@@ -8,11 +8,19 @@ const matriculaController = new MatriculaController();
 const router = Router();
 
 router.get('/pessoas', (req, res) => pessoaController.pegaTodos(req, res));
+router.get('/pessoas/todos', (req, res) => pessoaController.pegaTodasPessoas(req, res));
 router.get('/pessoas/:id', (req, res) => pessoaController.pegaUmPorId(req, res));
 router.post('/pessoas', (req, res) => pessoaController.criaNovo(req, res));
 router.put('/pessoas/:id', (req, res) => pessoaController.atualiza(req, res));
 router.delete('/pessoas/:id', (req, res) => pessoaController.exclui(req, res));
-router.get('/pessoas/:estudanteId/matriculas', (req, res) => pessoaController.pegaMatricula(req, res));
-router.post('/pessoas/:estudanteId/matriculas', (req, res) => matriculaController.criaNovo(req, res));
+router.get('/pessoas/:estudante_id/matriculas', (req, res) => pessoaController.pegaMatricula(req, res));
+router.get('/pessoas/:estudante_id/matriculas/todos', (req, res) => pessoaController.pegaTodasMatricula(req, res));
+router.get('/pessoas/:estudante_id/matriculas/matriculadas', (req, res) => matriculaController.buscaMatriculaPorEstudante(req, res));
+router.get('/pessoas/matriculas/lotadas', (req, res) => matriculaController.buscaCursosLotados(req, res));
+router.get('/pessoas/:estudante_id/matriculas/:id', (req, res) => matriculaController.pegaUm(req, res));
+router.post('/pessoas/:estudante_id/matriculas', (req, res) => matriculaController.criaNovo(req, res));
+router.put('/pessoas/:estudante_id/matriculas/:id', (req, res) => matriculaController.atualiza(req, res));
+router.put('/pessoas/:estudante_id/inativar', (req, res) => pessoaController.inativarPessoa(req, res));
+router.delete('/pessoas/:estudante_id/matriculas/:id', (req, res) => matriculaController.exclui(req, res));
 
 module.exports = router;
